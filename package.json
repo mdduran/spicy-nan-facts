@@ -1,0 +1,11 @@
+{
+    "main": "spicy-nan-facts.js",
+    "scripts": {
+        "start": "micro",
+        "dev": "micro-dev"
+    },
+    "dependencies": {
+        "micro": "^9.3.3",
+        "simple-markov": "^1.0.2"
+    }
+}
