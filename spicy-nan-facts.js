@@ -1,6 +1,6 @@
 const markov = require('fast-ish-markov');
 
-const chain = markov(require('./facts.json'), 3);
+const chain = markov(require('./facts.json'), 2);
 
 function generateSpicyNanFact() {
     return chain.fill(chain.pick(), 128);
