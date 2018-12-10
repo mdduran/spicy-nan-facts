@@ -1,23 +1,13 @@
-const SimpleMarkov = require('simple-markov');
+const markov = require('fast-ish-markov');
 
-const spicyNanFacts = require('./facts.json');
+const chain = markov(require('./facts.json'), 3);
 
-function generateSpicyNanFact(spicyNanFacts) {
-    let generatedSpicyNanFact = '';
-    if(spicyNanFacts.length > 0) {
-        const markov = new SimpleMarkov(3);
-        for(const fact of spicyNanFacts) {
-            markov.learn(fact);
-        }
-        generatedSpicyNanFact = capitalizeFirstLetter(markov.generateText(40));
-    }
-    return generatedSpicyNanFact;
+function generateSpicyNanFact() {
+    return chain.fill(chain.pick(), 128);
 }
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-module.exports = (req, res) => {
-    res.end(generateSpicyNanFact(spicyNanFacts));
-}
+module.exports = (req, res) => capitalizeFirstLetter(generateSpicyNanFact());
